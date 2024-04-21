@@ -4,10 +4,10 @@ import { redirect } from "next/navigation";
 interface Props {}
 
 const SnippetCreatePage = (props: Props) => {
-  async function createSnippet(formDate: FormData) {
+  async function createSnippet(formData: FormData) {
     "use server";
-    const title = formDate.get("title");
-    const code = formDate.get("code");
+    const title = formData.get("title");
+    const code = formData.get("code");
     if (
       title &&
       code &&
@@ -16,14 +16,17 @@ const SnippetCreatePage = (props: Props) => {
       title.length > 0 &&
       code.length > 0
     ) {
-      const result = await db.snippet.create({
-        data: {
-          title,
-          code,
-        },
-      });
-      console.log(result);
-      redirect("/");
+      await db.snippet
+        .create({
+          data: {
+            title,
+            code,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          redirect("/");
+        });
     }
   }
   return (
