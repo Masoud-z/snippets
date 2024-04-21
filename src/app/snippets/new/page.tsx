@@ -1,8 +1,33 @@
+import { db } from "@/db";
+import { redirect } from "next/navigation";
+
 interface Props {}
 
 const SnippetCreatePage = (props: Props) => {
+  async function createSnippet(formDate: FormData) {
+    "use server";
+    const title = formDate.get("title");
+    const code = formDate.get("code");
+    if (
+      title &&
+      code &&
+      typeof title === "string" &&
+      typeof code === "string" &&
+      title.length > 0 &&
+      code.length > 0
+    ) {
+      const result = await db.snippet.create({
+        data: {
+          title,
+          code,
+        },
+      });
+      console.log(result);
+      redirect("/");
+    }
+  }
   return (
-    <form>
+    <form action={createSnippet}>
       <h3 className="font-bold m-3">Crete Snippet </h3>
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
