@@ -1,9 +1,27 @@
 import { db } from "@/db";
+import Link from "next/link";
 
 export default async function Home() {
   const snippets = await db.snippet.findMany();
   const RenderedSnippets = snippets.map((snippet) => (
-    <div key={snippet.id}>{snippet.title}</div>
+    <Link
+      key={snippet.id}
+      href={`/snippets/${snippet.id}`}
+      className="flex w-full p-3 justify-between items-center border rounded"
+    >
+      <div>{snippet.title}</div>
+      <div>View</div>
+    </Link>
   ));
-  return <div>{RenderedSnippets}</div>;
+  return (
+    <div className="flex flex-col gap-6 mt-2">
+      <div className="flex justify-between items-center">
+        <h1>Snippets</h1>
+        <Link href="/snippets/new" className="p-3 rounded border">
+          New
+        </Link>
+      </div>
+      <div className="flex flex-col gap-4">{RenderedSnippets}</div>
+    </div>
+  );
 }
