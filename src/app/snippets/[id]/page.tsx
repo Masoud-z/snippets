@@ -1,3 +1,4 @@
+import { AppRouteKeys } from "@/core/routes";
 import { db } from "@/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -6,13 +7,13 @@ interface Props {
   params: { id: string };
 }
 
-const SnippetDetailPage = async ({ params: { id } }: Props) => {
+const SnippetDetailPage = async ({ params }: Props) => {
   await new Promise((r) => setTimeout(r, 1000));
-
-  if (isNaN(+id)) return notFound();
+  const id = +params.id;
+  if (isNaN(id)) return notFound();
 
   const snippet = await db.snippet.findFirst({
-    where: { id: +id },
+    where: { id },
   });
 
   if (!snippet) return notFound();
@@ -23,7 +24,7 @@ const SnippetDetailPage = async ({ params: { id } }: Props) => {
         <h1>{snippet.title}</h1>
         <div className="flex justify-center items-center gap-3">
           <Link
-            href={`/snippet/${snippet.id}/edit`}
+            href={AppRouteKeys.snippets.edit(snippet.id)}
             className="p-3 border rounded"
           >
             Edit

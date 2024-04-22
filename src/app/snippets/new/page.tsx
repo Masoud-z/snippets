@@ -24,7 +24,6 @@ const SnippetCreatePage = (props: Props) => {
           },
         })
         .then((res) => {
-          console.log(res);
           redirect("/");
         });
     }
