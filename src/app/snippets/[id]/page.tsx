@@ -1,3 +1,4 @@
+import { deleteSnippet } from "@/actions";
 import { AppRouteKeys } from "@/core/routes";
 import { db } from "@/db";
 import Link from "next/link";
@@ -18,6 +19,7 @@ const SnippetDetailPage = async ({ params }: Props) => {
 
   if (!snippet) return notFound();
 
+  const handleDeleteSnippet = deleteSnippet.bind(null, snippet.id);
   return (
     <div className="my-5">
       <div className="flex justify-between items-center">
@@ -29,7 +31,11 @@ const SnippetDetailPage = async ({ params }: Props) => {
           >
             Edit
           </Link>
-          <button className="p-3 border rounded">Delete</button>
+          <form action={handleDeleteSnippet}>
+            <button type="submit" className="p-3 border rounded">
+              Delete
+            </button>
+          </form>
         </div>
       </div>
       <pre className="p-3 mt-4 border rounded bg-gray-200 border-gray-300">
