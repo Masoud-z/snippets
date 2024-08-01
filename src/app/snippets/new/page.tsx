@@ -1,8 +1,27 @@
+import { db } from "@/db";
+
 interface Props {}
 
 const SnippetCreatePage = (props: Props) => {
+  async function submitSnippet(formData: FormData) {
+    "use server";
+    const title = formData.get("title");
+    const code = formData.get("code");
+    if (
+      title &&
+      code &&
+      typeof title === "string" &&
+      typeof code === "string"
+    ) {
+      const snippet = await db.snippet.create({
+        data: { title, code },
+      });
+
+      console.log(snippet);
+    }
+  }
   return (
-    <form>
+    <form onSubmit={()=>{}}>
       <h3 className="font-bold m-3">Crete Snippet </h3>
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
