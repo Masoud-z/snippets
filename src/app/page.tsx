@@ -1,11 +1,14 @@
 import { db } from "@/db";
+import Link from "next/link";
 
 export default async function Home() {
   const data = await db.snippet.findMany();
   return (
-    <div className="">
+    <div className="flex flex-col gap-3">
       {data.map((snippet) => (
-        <div key={snippet.title}> {snippet.title} </div>
+        <Link key={snippet.id} href={`/snippets/${snippet.id}`}>
+          {snippet.title}
+        </Link>
       ))}
     </div>
   );

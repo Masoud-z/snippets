@@ -1,9 +1,7 @@
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 
-interface Props {}
-
-const SnippetCreatePage = (props: Props) => {
+const SnippetCreatePage = () => {
   async function submitSnippet(formData: FormData) {
     "use server";
     const title = formData.get("title");
