@@ -1,3 +1,4 @@
+import { AppRouteKeys } from "@/core/constants/routes";
 import SnippetGetter from "@/core/SnippetGetter";
 import Link from "next/link";
 
@@ -15,7 +16,7 @@ const SnippetShowPage = async ({ params: { id } }: Props) => {
         <h1>{snippet.title}</h1>
         <div className="flex justify-center items-center gap-4">
           <Link
-            href={`/${snippet.id}/edit`}
+            href={AppRouteKeys.snippets.editSnippet(snippet.id)}
             className="p-3 border border-solid rounded-lg no-underline text-black"
           >
             Edit

@@ -1,3 +1,4 @@
+import { AppRouteKeys } from "@/core/constants/routes";
 import { db } from "@/db";
 import Link from "next/link";
 
@@ -6,7 +7,10 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-3">
       {data.map((snippet) => (
-        <Link key={snippet.id} href={`/snippets/${snippet.id}`}>
+        <Link
+          key={snippet.id}
+          href={AppRouteKeys.snippets.showSnippet(snippet.id)}
+        >
           {snippet.title}
         </Link>
       ))}
