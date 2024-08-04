@@ -1,4 +1,5 @@
 "use client";
+import { Editor } from "@monaco-editor/react";
 import { Snippet } from "@prisma/client";
 
 interface Props {
@@ -6,7 +7,16 @@ interface Props {
 }
 
 const EditSnippetForm = ({ snippet }: Props) => {
-  return <div>EditSnippetForm</div>;
+  return (
+    <div>
+      <Editor
+        height="40vh"
+        theme="vs-dark"
+        language="javascript"
+        defaultValue={snippet.code}
+      />
+    </div>
+  );
 };
 
 export default EditSnippetForm;
