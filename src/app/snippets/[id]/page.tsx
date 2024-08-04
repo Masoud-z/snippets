@@ -6,6 +6,10 @@ interface Props {
 }
 
 const EditSnippet = async ({ params: { id } }: Props) => {
+  const delay = await new Promise((res) => {
+    setTimeout(res, 4000);
+  });
+
   const snippetId = parseInt(id);
   if (Number.isNaN(snippetId)) notFound();
 

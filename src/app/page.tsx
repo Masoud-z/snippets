@@ -5,9 +5,9 @@ export default async function Home() {
   const data = await db.snippet.findMany();
 
   return (
-    <div>
+    <div className="flex flex-col gap-3">
       {data.map((snippet) => (
-        <Link key={snippet.id} href={`/${snippet.id}`}>
+        <Link key={snippet.id} href={`/snippets/${snippet.id}`}>
           {snippet.title}
         </Link>
       ))}
