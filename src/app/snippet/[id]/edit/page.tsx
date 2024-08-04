@@ -1,13 +1,14 @@
+import EditSnippetForm from "@/components/EditSnippetForm";
 import getSnippet from "@/core/reducer/getSnippetReducer";
 
 interface Props {
   params: { id: string };
 }
 
-const EditSnippetPage = ({ params: { id } }: Props) => {
-  const snippet = getSnippet(id);
+const EditSnippetPage = async ({ params: { id } }: Props) => {
+  const snippet = await getSnippet(id);
 
-  return <div>EditSnippetPage</div>;
+  return <EditSnippetForm snippet={snippet} />;
 };
 
 export default EditSnippetPage;
