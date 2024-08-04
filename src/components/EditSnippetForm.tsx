@@ -14,6 +14,7 @@ const EditSnippetForm = ({ snippet }: Props) => {
         theme="vs-dark"
         language="javascript"
         defaultValue={snippet.code}
+        options={{ minimap: { enabled: false } }}
       />
     </div>
   );
