@@ -1,5 +1,5 @@
 import EditSnippetForm from "@/components/EditSnippetForm";
-import SnippetGetter from "@/core/SnippetGetter";
+import SnippetGetter from "@/core/reducer/SnippetGetterReducer";
 
 interface Props {
   params: { id: string };
